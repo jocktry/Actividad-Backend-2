@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\sitioTuristico;
 use App\Http\Controllers\Controller;
+use App\libs\ResultResponse;
 use Illuminate\Http\Request;
 
 class SitioTuristicoController extends Controller
@@ -14,7 +15,7 @@ class SitioTuristicoController extends Controller
     public function index()
     {
         $result = new ResultResponse();
-        $result->setData(SitioTuristico::all());
+        $result->setData(sitioTuristico::all());
         $result->setStatusCode(ResultResponse::SUCCESS_CODE);
         $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
         return response()->json($result);

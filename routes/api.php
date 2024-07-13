@@ -13,10 +13,6 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/ciudad', function () {
-    return [CiudadController::class, 'index'];
-});
-
 Route::controller(CiudadController::class)->prefix('ciudad')->group(function () {
     Route::get('/',[CiudadController::class, 'index']);
     Route::post('/', [CiudadController::class, 'create']);

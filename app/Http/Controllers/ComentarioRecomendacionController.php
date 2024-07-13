@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\comentarioRecomendacion;
 use App\Http\Controllers\Controller;
+use App\libs\ResultResponse;
 use Illuminate\Http\Request;
 
 class ComentarioRecomendacionController extends Controller
@@ -13,7 +14,7 @@ class ComentarioRecomendacionController extends Controller
      */
     public function index()
     {
-        $comentarioRecomendaciones = ComentarioRecomendacion::all();
+        $comentarioRecomendaciones = comentarioRecomendacion::all();
 
         $result = new ResultResponse();
         $result->setData($comentarioRecomendaciones);
@@ -38,7 +39,7 @@ class ComentarioRecomendacionController extends Controller
             $this->validateComentarioRecomendacion($request);
 
             try {
-                $newComentarioRecomendacion = new ComentarioRecomendacion([
+                $newComentarioRecomendacion = new comentarioRecomendacion([
                         'id' => $request->id,
                         'id_comentario' => $request->id_comentario,
                         'id_recomendacion' => $request->id_recomendacion,
@@ -110,7 +111,7 @@ class ComentarioRecomendacionController extends Controller
         }
         return response()->json($result);
     }
-    public function put(Request $request, ComentarioRecomendacion $comentarioRecomendacion)
+    public function put(Request $request, comentarioRecomendacion $comentarioRecomendacion)
     {
         $this->validateComentarioRecomendacion($request);
 

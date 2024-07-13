@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\comentario;
 use App\Http\Controllers\Controller;
+use App\libs\ResultResponse;
 use Illuminate\Http\Request;
 
 class ComentarioController extends Controller
@@ -13,7 +14,7 @@ class ComentarioController extends Controller
      */
     public function index()
     {
-        $comentarios = Comentario::all();
+        $comentarios = comentario::all();
 
         $result = new ResultResponse();
         $result->setData($comentarios);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\foto;
 use App\Http\Controllers\Controller;
+use App\libs\ResultResponse;
 use Illuminate\Http\Request;
 
 class FotoController extends Controller
@@ -13,7 +14,7 @@ class FotoController extends Controller
      */
     public function index()
     {
-        $fotos = Foto::all();
+        $fotos = foto::all();
 
         $result = new ResultResponse();
         $result->setData($fotos);
@@ -38,7 +39,7 @@ class FotoController extends Controller
         $this->validateFoto($request);
 
         try {
-            $newFoto = new Foto([
+            $newFoto = new foto([
                     'id' => $request->id,
                     'foto' => $request->foto,
                     'id_comentario' => $request->id_comentario,
