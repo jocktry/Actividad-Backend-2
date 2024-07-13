@@ -10,6 +10,7 @@ class sitioTuristico extends Model
     use HasFactory;
 
     protected $table = 'sitio_turistico';
+    public $timestamps = false;
 
     protected $fillable = [
         'nombre',

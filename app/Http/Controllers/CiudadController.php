@@ -36,7 +36,6 @@ class CiudadController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateCiudad($request);
 
         try {
             $newCiudad = new Ciudad([
@@ -46,6 +45,9 @@ class CiudadController extends Controller
                     'latitud' => $request->latitud,
                     'longitud' => $request->longitud,
             ]);
+            //IMPRIMIR EN TERMINAL $newCiudad
+            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+            $out->writeln($newCiudad);
             $newCiudad->save();
 
             $result = new ResultResponse();
@@ -94,7 +96,6 @@ class CiudadController extends Controller
      */
     public function update(Request $request, Ciudad $ciudad)
     {
-        $this->validateCiudad($request);
         $result = new ResultResponse();
         try {
             $ciudad = $ciudad->findorFail($ciudad->id);
@@ -117,7 +118,6 @@ class CiudadController extends Controller
     }
     public function put(Request $request, Ciudad $ciudad)
     {
-        $this->validateCiudad($request);
 
         try {
             $ciudad = $ciudad->findorFail($ciudad->id);

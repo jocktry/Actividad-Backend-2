@@ -9,6 +9,7 @@ class comentario extends Model
 {
     use HasFactory;
     protected $table = 'comentario';
+    public $timestamps = false;
 
     protected $fillable = [
         'fecha_de_publicacion',

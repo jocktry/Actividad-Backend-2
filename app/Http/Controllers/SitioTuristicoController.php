@@ -34,7 +34,6 @@ class SitioTuristicoController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateSitioTuristico($request);
 
         try {
             $newSitioTuristico = new SitioTuristico([
@@ -94,7 +93,6 @@ class SitioTuristicoController extends Controller
      */
     public function update(Request $request, sitioTuristico $sitioTuristico)
     {
-        $this->validateSitioTuristico($request);
         $result = new ResultResponse();
         try {
             $sitioTuristico = $sitioTuristico->findorFail($sitioTuristico->id);
@@ -119,7 +117,6 @@ class SitioTuristicoController extends Controller
     }
     public function put(Request $request, sitioTuristico $sitioTuristico)
     {
-        $this->validateSitioTuristico($request);
         
         try {
             $sitioTuristico = $sitioTuristico->findorFail($sitioTuristico->id);

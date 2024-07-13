@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('nombre');
             $table->double('latitud', 15, 8);
             $table->double('longitud', 15, 8);
-            $table->timestamps();
         });
     }
 

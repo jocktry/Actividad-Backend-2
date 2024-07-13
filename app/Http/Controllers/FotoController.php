@@ -36,7 +36,6 @@ class FotoController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateFoto($request);
 
         try {
             $newFoto = new foto([
@@ -92,7 +91,6 @@ class FotoController extends Controller
      */
     public function update(Request $request, foto $foto)
     {
-        $this->validateFoto($request);
         $result = new ResultResponse();
         try {
             $foto = $foto->findorFail($foto->id);
@@ -113,7 +111,6 @@ class FotoController extends Controller
     }
     public function put(Request $request, foto $foto)
     {
-        $this->validateFoto($request);
 
         try {
             $foto = $foto->findorFail($foto->id);

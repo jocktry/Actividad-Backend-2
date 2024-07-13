@@ -36,7 +36,6 @@ class RecomendacionController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateRecomendacion($request);
 
         try {
             $newRecomendacion = new recomendacion([
@@ -85,13 +84,33 @@ class RecomendacionController extends Controller
     {
         //
     }
+    public function put(Request $request, recomendacion $recomendacion)
+    {
 
+        try {
+            $recomendacion = $recomendacion->findorFail($recomendacion->id);
+
+            $recomendacion->id = $request->get('id',$recomendacion->id);
+            $recomendacion->nombre = $request->get('nombre',$recomendacion->nombre);
+
+            $recomendacion->save();            
+            $result = new ResultResponse();
+            $result->setData($recomendacion);
+            $result->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
+            return response()->json($result);
+        } catch (\Exception $e) {
+             $result = new ResultResponse();
+            $result->setStatusCode(ResultResponse::ERROR_CODE);
+            $result->setMessage($e->getMessage());
+            return response()->json($result);
+        }
+    }
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, recomendacion $recomendacion)
     {
-        $this->validateRecomendacion($request);
         $result = new ResultResponse();
         try {
             $recomendacion = $recomendacion->findorFail($recomendacion->id);

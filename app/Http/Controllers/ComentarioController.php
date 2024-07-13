@@ -36,7 +36,6 @@ class ComentarioController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validateComentario($request);
 
         try {
             $newComentario = new Comentario([
@@ -94,7 +93,6 @@ class ComentarioController extends Controller
      */
     public function update(Request $request, comentario $comentario)
     {
-        $this->validateComentario($request);
         $result = new ResultResponse();
         try {
             $comentario = $comentario->findorFail($comentario->id);
@@ -117,7 +115,6 @@ class ComentarioController extends Controller
     }
     public function put(Request $request, Comentario $comentario)
     {
-        $this->validateComentario($request);
 
         try {
             $comentario = $comentario->findorFail($comentario->id);

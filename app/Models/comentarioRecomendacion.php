@@ -9,6 +9,7 @@ class comentarioRecomendacion extends Model
 {
     use HasFactory;
     protected $table = 'comentario_recomendacion';
+    public $timestamps = false;
 
     protected $fillable = [
         'id',

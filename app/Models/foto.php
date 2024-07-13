@@ -9,6 +9,7 @@ class foto extends Model
 {
     use HasFactory;
     protected $table = 'foto';
+    public $timestamps = false;
 
     protected $fillable = [
         'id',

@@ -9,6 +9,7 @@ class recomendacion extends Model
 {
     use HasFactory;
     protected $table = 'recomendacion';
+    public $timestamps = false;
 
     protected $fillable = [
         'id',
