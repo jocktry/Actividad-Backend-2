@@ -14,7 +14,7 @@ class RecomendacionController extends Controller
      */
     public function index()
     {
-        $recomendaciones = Recomendacion::all();
+        $recomendaciones = recomendacion::all();
 
         $result = new ResultResponse();
         $result->setData($recomendaciones);
@@ -39,7 +39,7 @@ class RecomendacionController extends Controller
         $this->validateRecomendacion($request);
 
         try {
-            $newRecomendacion = new Recomendacion([
+            $newRecomendacion = new recomendacion([
                     'id' => $request->id,
                     'nombre' => $request->nombre,
             ]);

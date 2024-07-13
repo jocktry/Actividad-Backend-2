@@ -111,7 +111,7 @@ class FotoController extends Controller
         }
         return response()->json($result);
     }
-    public function put(Request $request, Foto $foto)
+    public function put(Request $request, foto $foto)
     {
         $this->validateFoto($request);
 
