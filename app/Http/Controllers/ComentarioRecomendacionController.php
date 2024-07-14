@@ -36,15 +36,13 @@ class ComentarioRecomendacionController extends Controller
      */
     public function store(Request $request)
     {
-            $this->validateComentarioRecomendacion($request);
             try {
                 $newComentarioRecomendacion = new comentarioRecomendacion([
-                        'id' => $request->id,
                         'id_comentario' => $request->id_comentario,
                         'id_recomendacion' => $request->id_recomendacion,
                 ]);
                 $newComentarioRecomendacion->save();
-
+                
                 $result = new ResultResponse();
                 $result->setData($newComentarioRecomendacion);
                 $result->setStatusCode(ResultResponse::SUCCESS_CODE);
@@ -95,7 +93,6 @@ class ComentarioRecomendacionController extends Controller
         try {
             $comentarioRecomendacion = $comentarioRecomendacion->findorFail($comentarioRecomendacion->id);
             $comentarioRecomendacion->update([
-                'id' => $request->id,
                 'id_comentario' => $request->id_comentario,
                 'id_recomendacion' => $request->id_recomendacion,
             ]);

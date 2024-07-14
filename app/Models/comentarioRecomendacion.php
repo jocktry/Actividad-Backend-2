@@ -12,7 +12,6 @@ class comentarioRecomendacion extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'id',
         'id_comentario',
         'id_recomendacion',
     ];

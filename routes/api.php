@@ -25,10 +25,10 @@ Route::controller(CiudadController::class)->prefix('ciudad')->group(function () 
 Route::controller(SitioTuristicoController::class)->prefix('sitio_turistico')->group(function () {
     Route::get('/',[SitioTuristicoController::class, 'index']);
     Route::post('/', [SitioTuristicoController::class, 'store']);
-    Route::get('/{sitio}', [SitioTuristicoController::class, 'show']);
-    Route::post('/{sitio}', [SitioTuristicoController::class, 'update']);
-    Route::put('/{sitio}', [SitioTuristicoController::class, 'put']);
-    Route::delete('/{sitio}', [SitioTuristicoController::class, 'destroy']);
+    Route::get('/{sitioTuristico}', [SitioTuristicoController::class, 'show']);
+    Route::post('/{sitioTuristico}', [SitioTuristicoController::class, 'update']);
+    Route::put('/{sitioTuristico}', [SitioTuristicoController::class, 'put']);
+    Route::delete('/{sitioTuristico}', [SitioTuristicoController::class, 'destroy']);
 });
 
 Route::controller(ComentarioController::class)->prefix('comentario')->group(function () {

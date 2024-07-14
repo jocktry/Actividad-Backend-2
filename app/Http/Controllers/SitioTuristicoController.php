@@ -69,6 +69,8 @@ class SitioTuristicoController extends Controller
 
         try {
             $sitioTuristico = $sitioTuristico->findorFail($sitioTuristico->id);
+            $out = new \Symfony\Component\Console\Output\ConsoleOutput();
+            $out->writeln($sitioTuristico);
             $result->setData($sitioTuristico);
             $result->setStatusCode(ResultResponse::SUCCESS_CODE);
             $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
