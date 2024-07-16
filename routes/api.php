@@ -29,6 +29,7 @@ Route::controller(SitioTuristicoController::class)->prefix('sitio_turistico')->g
     Route::post('/{sitioTuristico}', [SitioTuristicoController::class, 'update']);
     Route::put('/{sitioTuristico}', [SitioTuristicoController::class, 'put']);
     Route::delete('/{sitioTuristico}', [SitioTuristicoController::class, 'destroy']);
+    Route::get('/getSitioTuristicoByCiudad/{id_ciudad}', [SitioTuristicoController::class, 'getSitioTuristicoByCiudad']);
 });
 
 Route::controller(ComentarioController::class)->prefix('comentario')->group(function () {
@@ -38,6 +39,7 @@ Route::controller(ComentarioController::class)->prefix('comentario')->group(func
     Route::post('/{comentario}', [ComentarioController::class, 'update']);
     Route::put('/{comentario}', [ComentarioController::class, 'put']);
     Route::delete('/{comentario}', [ComentarioController::class, 'destroy']);
+    Route::get('/getComentarioBySitioTuristico/{id_sitio_turistico}', [ComentarioController::class, 'getComentarioBySitioTuristico']);
 });
 
 Route::controller(RecomendacionController::class)->prefix('recomendacion')->group(function () {

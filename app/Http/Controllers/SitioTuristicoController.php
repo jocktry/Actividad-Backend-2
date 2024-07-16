@@ -29,6 +29,19 @@ class SitioTuristicoController extends Controller
         //
     }
 
+    public function getSitioTuristicoByCiudad ($ciudad)
+    {
+        try {
+            $result = new ResultResponse();
+            $result->setData(sitioTuristico::where('id_ciudad',$ciudad)->get());
+            $result->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
+        } catch (\Exception $e) {
+            $result->setStatusCode(ResultResponse::ERROR_CODE);
+            $result->setMessage(ResultResponse::MESSAGE_ERROR);
+        }
+        return response()->json($result);
+    }
     /**
      * Store a newly created resource in storage.
      */

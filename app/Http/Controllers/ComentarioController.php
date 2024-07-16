@@ -79,7 +79,7 @@ class ComentarioController extends Controller
 
         return response()->json($result);
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */
@@ -145,6 +145,19 @@ class ComentarioController extends Controller
         try {
             $comentario = $comentario->findorFail($comentario->id);
             $comentario->delete();
+            $result->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
+        } catch (\Exception $e) {
+            $result->setStatusCode(ResultResponse::ERROR_CODE);
+            $result->setMessage(ResultResponse::MESSAGE_ERROR);
+        }
+        return response()->json($result);
+    }
+    public function getComentarioBySitioTuristico ($sitioTuristico)
+    {
+        try {
+            $result = new ResultResponse();
+            $result->setData(comentario::where('id_sitio_turistico',$sitioTuristico)->get());
             $result->setStatusCode(ResultResponse::SUCCESS_CODE);
             $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
         } catch (\Exception $e) {
