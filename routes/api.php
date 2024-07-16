@@ -40,6 +40,7 @@ Route::controller(ComentarioController::class)->prefix('comentario')->group(func
     Route::put('/{comentario}', [ComentarioController::class, 'put']);
     Route::delete('/{comentario}', [ComentarioController::class, 'destroy']);
     Route::get('/getComentarioBySitioTuristico/{id_sitio_turistico}', [ComentarioController::class, 'getComentarioBySitioTuristico']);
+    Route::get('/getRecomendacionBySitioTuristico/{id_sitio_turistico}', [ComentarioController::class, 'getRecomendacionBySitioTuristico']);
 });
 
 Route::controller(RecomendacionController::class)->prefix('recomendacion')->group(function () {
@@ -52,6 +53,7 @@ Route::controller(RecomendacionController::class)->prefix('recomendacion')->grou
 });
 Route::controller(comentarioRecomendacionController::class)->prefix('comentario_recomendacion')->group(function () {
     Route::get('/',[comentarioRecomendacionController::class, 'index']);
+    Route::get('/getRecomendacionByComentario/{id_comentario}', [comentarioRecomendacionController::class, 'getRecomendacionByComentario']);
     Route::post('/', [comentarioRecomendacionController::class, 'store']);
     Route::get('/{comentario_recomendacion}', [comentarioRecomendacionController::class, 'show']);
     Route::post('/{comentario_recomendacion}', [comentarioRecomendacionController::class, 'update']);

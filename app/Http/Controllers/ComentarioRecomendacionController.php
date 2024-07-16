@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\comentarioRecomendacion;
 use App\Http\Controllers\Controller;
+use App\Models\recomendacion;
 use App\libs\ResultResponse;
 use Illuminate\Http\Request;
 
@@ -22,7 +23,32 @@ class ComentarioRecomendacionController extends Controller
         $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
         return response()->json($result);   
     }
+    public function getRecomendacionByComentario($id_comentario)
+    {
+        try {
+            $result = new ResultResponse();
+            $comentarioRecomendaciones = comentarioRecomendacion::where('id_comentario', $id_comentario)->get();
+    
+            $recomendaciones = [];
+    
+            foreach ($comentarioRecomendaciones as $comentarioRecomendacion) {
+                $recomendacion = recomendacion::find($comentarioRecomendacion->id_recomendacion);
+                if ($recomendacion) {
+                    $recomendaciones[] = $recomendacion;
+                }
+            }
+    
+            $result->setData($recomendaciones);
+            $result->setStatusCode(ResultResponse::SUCCESS_CODE);
+            $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
+        } catch (\Exception $e) {
+            $result->setStatusCode(ResultResponse::ERROR_CODE);
+            $result->setMessage(ResultResponse::MESSAGE_ERROR);
+        }
+        return response()->json($result);
+    }
 
+    
     /**
      * Show the form for creating a new resource.
      */

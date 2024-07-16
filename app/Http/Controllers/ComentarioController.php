@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\comentario;
 use App\Http\Controllers\Controller;
+use App\Models\recomendacion;
+use App\Models\comentarioRecomendacion;
 use App\libs\ResultResponse;
 use Illuminate\Http\Request;
 
@@ -166,4 +168,55 @@ class ComentarioController extends Controller
         }
         return response()->json($result);
     }
+    public function getRecomendacionBySitioTuristico($sitioTuristico)
+    {
+        try {
+            $result = new ResultResponse();
+            $comentarios = comentario::where('id_sitio_turistico', $sitioTuristico)->get();
+        
+            $recomendacionCount = [];
+            $recomendaciones = [];
+
+            foreach ($comentarios as $comentario) {
+                $comentarioRecomendaciones = comentarioRecomendacion::where('id_comentario', $comentario->id)->get();
+
+                foreach ($comentarioRecomendaciones as $comentarioRecomendacion) {
+                    $recomendacion = recomendacion::find($comentarioRecomendacion->id_recomendacion);
+                    if ($recomendacion) {
+                        $recomendaciones[$recomendacion->id] = $recomendacion;
+                    
+                        if (isset($recomendacionCount[$recomendacion->id])) {
+                            $recomendacionCount[$recomendacion->id]++;
+                        } else {
+                        $recomendacionCount[$recomendacion->id] = 1;
+                        }
+                    }
+                }
+            }
+
+        // Ordenar las recomendaciones por conteo en orden descendente
+        arsort($recomendacionCount);
+
+        $data = [];
+        $count = 0;
+
+        foreach ($recomendacionCount as $id => $count) {
+            if ($count >= 5) break; // Solo las 5 más repetidas
+            $data[] = [
+                'recomendacion' => $recomendaciones[$id],
+                'conteo' => $count
+            ];
+            $count++;
+        }
+
+        $result->setData($data);
+        $result->setStatusCode(ResultResponse::SUCCESS_CODE);
+        $result->setMessage(ResultResponse::MESSAGE_SUCCESS);
+    } catch (\Exception $e) {
+        $result->setStatusCode(ResultResponse::ERROR_CODE);
+        $result->setMessage($e->getMessage()); // Mostrar el mensaje de error real para depuración
+    }
+    return response()->json($result);
+}
+    
 }
